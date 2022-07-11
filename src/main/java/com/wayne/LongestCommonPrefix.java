@@ -7,8 +7,8 @@ package com.wayne;
 public class LongestCommonPrefix {
     public static void main(String[] args) {
         LongestCommonPrefix prefix = new LongestCommonPrefix();
-        String[] strs = {"ab", "a"};
-        System.out.println(prefix.longestCommonPrefixA(strs));
+        String[] strs = {"abc", "ab", "abd"};
+        System.out.println(prefix.longestCommonPrefixB(strs));
     }
     public String longestCommonPrefix(String[] strs) {
         // 数组没有元素，直接返回结果
@@ -66,6 +66,37 @@ public class LongestCommonPrefix {
             }
         }
        return strs[0];
+    }
+
+    /**
+     * 逐个比较两个元素的公共前缀，再使用公共前缀和后面的元素对比，获取最新的公共前缀
+     */
+    public String longestCommonPrefixB(String[] strs) {
+        // 数组没有元素，直接返回结果
+        int arrLength = strs.length;
+        if(arrLength == 0){
+            return "";
+        }
+        String prefix = strs[0];
+        for (int i = 1; i < arrLength; i++) {
+            prefix = getPrefix(prefix, strs[i]);
+            // 如果数组的前两个元素没有公共前缀，就没必要比较后面的元素了
+            if(prefix.length() == 0){
+                break;
+            }
+        }
+        return prefix;
+    }
+
+    private String getPrefix(String str1, String str2){
+        int minLength = Math.min(str1.length(), str2.length());
+        int index = 0;
+        for (int i = 0; i < minLength; i++) {
+            if(index < minLength && str1.charAt(i)== str2.charAt(i)){
+                index++;
+            }
+        }
+        return str1.substring(0, index);
     }
 
 }
