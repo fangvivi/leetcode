@@ -7,8 +7,8 @@ package com.wayne;
 public class LongestCommonPrefix {
     public static void main(String[] args) {
         LongestCommonPrefix prefix = new LongestCommonPrefix();
-        String[] strs = {"dog","dogecar","doga"};
-        System.out.println(prefix.longestCommonPrefix(strs));
+        String[] strs = {"ab", "a"};
+        System.out.println(prefix.longestCommonPrefixA(strs));
     }
     public String longestCommonPrefix(String[] strs) {
         // 数组没有元素，直接返回结果
@@ -44,4 +44,28 @@ public class LongestCommonPrefix {
         }
         return prefix.toString();
     }
+
+    /**
+     * 这个方法是上面那个方法的简化版，思路都是按照顺序纵向匹配所有字符串的字符
+     */
+    public String longestCommonPrefixA(String[] strs) {
+        // 数组没有元素，直接返回结果
+        int arrLength = strs.length;
+        if(arrLength == 0){
+            return "";
+        }
+        int count = strs[0].length();
+        for (int i = 0; i < count; i++) {
+            // 遍历字符串的字符
+            char c = strs[0].charAt(i);
+            for (int j = 1; j < arrLength; j++) {
+                // 如果字符的索引值已经到了第一个字符串的长度，后面的字符就不再属于公共前缀
+                if(i == strs[j].length() || strs[j].charAt(i) != c){
+                    return strs[0].substring(0, i);
+                }
+            }
+        }
+       return strs[0];
+    }
+
 }
