@@ -1,6 +1,7 @@
 package com.wayne;
 
 import java.util.Arrays;
+import java.util.logging.Logger;
 
 /**
  * https://leetcode.cn/problems/remove-duplicates-from-sorted-array/
@@ -9,11 +10,12 @@ import java.util.Arrays;
  */
 public class RemoveDuplicates {
     public static void main(String[] args) {
+        Logger log = Logger.getGlobal();
         //[0,0,1,1,1,2,2,3,3,4]
         int[] arr = {0, 1, 2, 2, 3, 3, 4};
         RemoveDuplicates re = new RemoveDuplicates();
-        System.out.println(re.removeDuplicatesA(arr));
-        System.out.println(Arrays.toString(arr));
+        log.info(re.removeDuplicatesA(arr)+"");
+        log.info(Arrays.toString(arr));
     }
 
     public int removeDuplicates(int[] nums) {
