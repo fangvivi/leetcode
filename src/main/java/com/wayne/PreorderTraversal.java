@@ -25,6 +25,9 @@ public class PreorderTraversal {
         preorderTraversal(t1);
     }
 
+    /**
+     * 递归实现
+     */
     public static List<Integer> preorderTraversal(TreeNode root) {
        ArrayList<Integer> list = new ArrayList<>();
        preorder(root, list);
@@ -40,6 +43,9 @@ public class PreorderTraversal {
         preorder(root.right, list);
     }
 
+    /**
+     * 迭代实现
+     */
     public static List<Integer> preorderTraversalA(TreeNode root) {
         List<Integer> list = new ArrayList<>();
         if(root == null){
