@@ -1,6 +1,8 @@
 package com.wayne;
 
 import java.util.ArrayList;
+import java.util.Deque;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -36,6 +38,23 @@ public class InorderTraversal {
         inorder(root.left, list);
         list.add(root.val);
         inorder(root.right, list);
+    }
+
+    public static List<Integer> inorderTraversalA(TreeNode root) {
+        ArrayList<Integer> list = new ArrayList<>();
+        Deque<TreeNode> stack = new LinkedList<>();
+        while (!stack.isEmpty() || root != null){
+            while (root != null){
+                // 这个循环相当于把所有的节点和它们的左节点都放到了栈中
+                stack.push(root);
+                root = root.left;
+            }
+            // 放完之后栈顶就是最左的叶子节点
+            root = stack.pop();
+            list.add(root.val);
+            root = root.right;
+        }
+        return list;
     }
 
 
