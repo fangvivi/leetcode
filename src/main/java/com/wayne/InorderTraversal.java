@@ -40,6 +40,9 @@ public class InorderTraversal {
         inorder(root.right, list);
     }
 
+    /**
+     * 迭代解法
+     */
     public static List<Integer> inorderTraversalA(TreeNode root) {
         ArrayList<Integer> list = new ArrayList<>();
         Deque<TreeNode> stack = new LinkedList<>();
