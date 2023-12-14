@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
- * 二分查找，时间复杂度是O(logn)，以2位底
+ * 二分查找，时间复杂度是O(logn)，以2为底
  *
  * @author wayne
  */
