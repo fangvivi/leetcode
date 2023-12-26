@@ -3,6 +3,7 @@ package com.wayne.hot100;
 import java.util.*;
 
 /**
+ * 字母异位词分组
  * 给你一个字符串数组，请你将 字母异位词 组合在一起。可以按任意顺序返回结果列表。
  * 字母异位词 是由重新排列源单词的所有字母得到的一个新单词。
  * <a href="https://leetcode.cn/problems/group-anagrams/?envType=study-plan-v2&envId=top-100-liked">链接</a>
