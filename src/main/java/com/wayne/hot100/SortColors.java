@@ -5,8 +5,6 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 /**
  * 颜色分类
  * 给定一个包含红色、白色和蓝色、共 n 个元素的数组 nums ，原地对它们进行排序，使得相同颜色的元素相邻，并按照红色、白色、蓝色顺序排列。
@@ -20,24 +18,71 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class SortColors {
     @Test
     void test(){
-        int[] nums = {1,2,0};
-        sortColors(nums);
+        int[] nums = {2};
+        sortColorsB(nums);
         log.info("{}",Arrays.toString(nums));
     }
-    public static void sortColors(int[] nums) {
-        int i = -1;
-        int j = nums.length;
-        for (int k = 0; k < nums.length; k++) {
-            if(k == j){
-                break;
+
+    public static void sortColorsB(int[] nums){
+        int n = nums.length;
+        int p0 = 0;
+        int p1 = 0;
+        for (int i = 0; i < n; i++) {
+            if(nums[i] == 1){
+                swap(nums, i, p1);
+                p1++;
             }
+            if(nums[i] == 0){
+                swap(nums, i, p0);
+                // 因为最后一个0和第一个1是相邻的，如果p0 < p1, p0当前的位置一定是1，这个1会被换到i的位置，所以需要把i和p1的元素就换位置
+                if(p0 < p1){
+                    swap(nums, i, p1);
+                }
+                p0++;
+                p1++;
+            }
+        }
+    }
+
+    public static void sortColorsA(int[] nums) {
+        int n = nums.length;
+        int cursor = 0;
+        for (int i = 0; i < n; i++) {
+            if(nums[i] == 0){
+                swap(nums, i, cursor);
+                cursor++;
+            }
+        }
+        for (int i = cursor; i < n; i++) {
+            if(nums[i] == 1){
+                swap(nums, i, cursor);
+                cursor++;
+            }
+        }
+    }
+
+    /**
+     * 遍历两次
+     */
+    public static void sortColors(int[] nums) {
+        int length = nums.length;
+        if(length == 1){
+            return;
+        }
+        // 排序完成，指向最后一个0
+        int i = -1;
+        for (int k = 0; k < nums.length; k++) {
             if (nums[k] == 0) {
                 i++;
-                swap(nums, i, k);
+                swap(nums, k, i);
             }
+        }
+        // 排序完成，指向第一个2
+        i = length;
+        for (int k = length - 1; k > 0; k--) {
             if (nums[k] == 2) {
-                j--;
-                swap(nums, j, k);
+                i--;
+                swap(nums, k, i);
             }
         }
     }
