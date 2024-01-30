@@ -1,14 +1,16 @@
-package com.wayne;
+package com.wayne.classic;
 
-import java.util.List;
+import com.wayne.ListNode;
+import org.junit.jupiter.api.Test;
 
 /**
- * 反转链表
- * https://leetcode.cn/problems/reverse-linked-list/
- * @author wayne
+ * @author waine
+ * @date 2024-01-29 17:29
  */
 public class ReverseLinkedList {
-    public static void main(String[] args) {
+
+    @Test
+    public void test(){
         ListNode n1 = new ListNode(1);
         ListNode n2 = new ListNode(2);
         ListNode n3 = new ListNode(3);
@@ -19,26 +21,30 @@ public class ReverseLinkedList {
         n3.next = n4;
         n4.next = n5;
 
-        ListNode newListNode = reverseList(n1);
+        reverseRecurse(n1);
     }
 
     /**
-     * 递归的方法
+     * 递归的方式反转链表
      */
-    public static ListNode reverseList(ListNode head) {
-        if (head == null || head.next == null) {
+    public static ListNode reverseRecurse(ListNode head){
+        // 递归的基线条件
+        if(head == null || head.next == null){
             return head;
         }
-        ListNode newHead = reverseList(head.next);
+        // 最终找到链表的尾节点返回，作为新的头节点
+        ListNode newHead = reverseRecurse(head.next);
+        // 调换父子节点的关系
         head.next.next = head;
+        // 去掉子节点
         head.next = null;
         return newHead;
     }
 
     /**
-     * 迭代法，使用双指针
+     * 双指针反转链表
      */
-    public static ListNode reverseListA(ListNode head) {
+    public static ListNode reverseDoublePointer(ListNode head){
         ListNode cur = head;
         ListNode pre = null;
         while (cur != null){
@@ -48,6 +54,6 @@ public class ReverseLinkedList {
             cur = next;
         }
         return pre;
-    }
 
+    }
 }
